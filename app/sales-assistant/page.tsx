@@ -22,9 +22,9 @@ export default function SalesAssistant() {
       const res = await fetch('/api/leads');
       const data = await res.json();
       if (data.success) {
-        // Only show leads that are active (not lost or installed)
+        // Only show leads that are active (not lost, signed, or installed)
         const activeLeads = data.leads.filter(
-          (l: Lead) => l.stage !== 'lost' && l.stage !== 'installed'
+          (l: Lead) => l.stage !== 'lost' && l.stage !== 'signed' && l.stage !== 'installed'
         );
         setLeads(activeLeads);
       }
