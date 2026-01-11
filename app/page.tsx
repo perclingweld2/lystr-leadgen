@@ -170,7 +170,7 @@ export default function Dashboard() {
               />
             </div>
           </div>
-          <div className="flex gap-4 mt-4">
+          <div className="flex flex-col sm:flex-row gap-3 mt-4">
             <button
               onClick={applyFilters}
               className="bg-primary-600 text-white px-6 py-2 rounded-md hover:bg-primary-700 transition"
@@ -185,7 +185,7 @@ export default function Dashboard() {
             </button>
             <button
               onClick={() => setShowCallList(!showCallList)}
-              className="bg-success-600 text-white px-6 py-2 rounded-md hover:bg-success-700 transition ml-auto"
+              className="bg-success-600 text-white px-4 py-2 rounded-md hover:bg-success-700 transition sm:ml-auto text-sm sm:text-base"
             >
               📞 Generera Ringningslista
             </button>
