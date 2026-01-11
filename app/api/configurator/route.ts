@@ -41,9 +41,9 @@ function mapConfiguratorToLead(input: ConfiguratorInput): Partial<Lead> {
     heatingType: 'Heat Pump',
     hasEV: input.hasEV,
     intentSignals,
-    contactName: input.name,
-    contactPhone: input.phone,
-    contactEmail: input.email,
+    contactName: input.name?.trim() || 'Anonym Besökare',
+    contactPhone: input.phone?.trim() || '070-000 00 00',
+    contactEmail: input.email?.trim() || 'anonymous@example.com',
   };
 }
 
