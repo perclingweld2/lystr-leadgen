@@ -1,13 +1,32 @@
 import Database from 'better-sqlite3';
 import path from 'path';
+import fs from 'fs';
 import type { Lead, Interaction, Campaign } from '@/types';
 
 const dbPath = path.join(process.cwd(), 'data', 'leadgen.db');
 
 export function getDb() {
+  // Ensure data directory exists
+  const dataDir = path.dirname(dbPath);
+  if (!fs.existsSync(dataDir)) {
+    fs.mkdirSync(dataDir, { recursive: true });
+  }
+
   const db = new Database(dbPath);
   db.pragma('journal_mode = WAL');
   return db;
+}
+
+export function isDatabaseEmpty(): boolean {
+  try {
+    const db = getDb();
+    const result = db.prepare('SELECT COUNT(*) as count FROM leads').get() as { count: number };
+    db.close();
+    return result.count === 0;
+  } catch (error) {
+    // If table doesn't exist, DB is empty
+    return true;
+  }
 }
 
 export function initDb() {
